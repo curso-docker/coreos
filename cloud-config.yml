@@ -5,8 +5,6 @@ hostname: coreos1
 coreos:
 
   units:
-    - name: etcd2.service
-      command: start
     - name: systemd-networkd.service
       command: stop
     - name: static.network
