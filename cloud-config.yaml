@@ -2,7 +2,20 @@
 
 hostname: coreos-01
 
-#coreos:
+coreos:
+  units:
+    - name: static.network
+      content: |
+        [Match]
+        Name=enp0s8
+        [Network]
+        Address=192.168.56.101/24
+
+#    - name: etcd2.service
+#      command: start
+
+#    - name: fleet.service
+#      command: start
 
 #  etcd2:
 #    discovery: https://discovery.etcd.io/f8e05dc90b0d3206ff559d3cc85b9667
@@ -10,12 +23,6 @@ hostname: coreos-01
 #    initial-advertise-peer-urls: http://192.168.56.101:2380
 #    listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
 #    listen-peer-urls: http://192.168.56.101:2380
-#  units:
-#    - name: etcd2.service
-#      command: start
-
-#    - name: fleet.service
-#      command: start
 
 users:
   - name: admin
