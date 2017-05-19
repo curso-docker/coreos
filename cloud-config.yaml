@@ -1,38 +1,21 @@
 #cloud-config
-hostname: coreos-node0x
 
-coreos:
-  units:
+hostname: coreos-01
 
-    - name: etcd2.service
-      command: start
-    - name: fleet.service
-      command: start
+#coreos:
 
-    - name: static.network
-      content: |
-        [Match]
-        Name=enp0s3
-        [Network]
-        Address=192.168.56.x/24
-        Gateway=192.168.56.x
-        DNS=8.8.8.8
+#  etcd2:
+#    discovery: https://discovery.etcd.io/f8e05dc90b0d3206ff559d3cc85b9667
+#    advertise-client-urls: http://192.168.56.101:2379,http://192.168.56.101:4001
+#    initial-advertise-peer-urls: http://192.168.56.101:2380
+#    listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
+#    listen-peer-urls: http://192.168.56.101:2380
+#  units:
+#    - name: etcd2.service
+#      command: start
 
-    - name: flanneld.service
-      drop-ins:
-       - name: 50-network-config.conf
-         content: |
-          [Service]
-          ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{"Network":"10.1.0.0/16", "Backend": {"Type": "vxlan"}}'
-      command: start
-
-  etcd2:
-    name: "node0x"
-    discovery: 
-    advertise-client-urls: http://192.168.56.x:2379
-    initial-advertise-peer-urls: http://192.168.56.x:2380
-    listen-client-urls: http://0.0.0.0:2379
-    listen-peer-urls: http://192.168.56.x:2380
+#    - name: fleet.service
+#      command: start
 
 users:
   - name: admin
@@ -40,4 +23,3 @@ users:
     groups:
       - sudo
       - docker
-
