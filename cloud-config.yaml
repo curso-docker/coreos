@@ -9,8 +9,8 @@ coreos:
         [Match]
         Name=enp0s3
         [Network]
-        Address=192.168.56.101/24
-        Gateway=192.168.56.2
+        Address=192.168.56.116/24
+        Gateway=192.168.56.111
         DNS=8.8.8.8
 
 #    - name: etcd2.service
@@ -22,10 +22,10 @@ coreos:
 #  etcd2:
 #    name: "node01"
 #    discovery: https://discovery.etcd.io/f8e05dc90b0d3206ff559d3cc85b9667
-#    advertise-client-urls: http://192.168.56.101:2379,http://192.168.56.101:4001
-#    initial-advertise-peer-urls: http://192.168.56.101:2380
+#    advertise-client-urls: http://192.168.56.116:2379,http://192.168.56.116:4001
+#    initial-advertise-peer-urls: http://192.168.56.116:2380
 #    listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
-#    listen-peer-urls: http://192.168.56.101:2380
+#    listen-peer-urls: http://192.168.56.116:2380
 
 users:
   - name: admin
