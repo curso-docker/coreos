@@ -19,6 +19,14 @@ coreos:
 #    - name: fleet.service
 #      command: start
 
+#    - name: flanneld.service
+#     drop-ins:  
+  #     - name: 50-network-config.conf
+  #       content: |
+  #         [Service]
+  #          ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{ "Network": "10.1.0.0/16" }'
+  #       command: start
+
 #  etcd2:
 #    name: "node01"
 #    discovery: https://discovery.etcd.io/f8e05dc90b0d3206ff559d3cc85b9667
