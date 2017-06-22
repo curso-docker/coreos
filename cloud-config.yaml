@@ -3,40 +3,41 @@
 hostname: coreos-node01
 
 coreos:
-  units:
-    - name: static.network
-      content: |
-        [Match]
-        Name=enp0s3
-        [Network]
-        Address=192.168.56.116/24
-        Gateway=192.168.56.111
-        DNS=8.8.8.8
-
-#    - name: etcd2.service
-#      command: start
-
-#    - name: fleet.service
-#      command: start
-
-#  - name: flanneld.service
-#    dropins:
-#      - name: 50-network-config.conf
-#        contents: |
-#          [Service]
-#          ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{ "Network": "10.1.0.0/16" }'
-#    command: start
 
 #  etcd2:
-#    discovery: https://discovery.etcd.io/17752b3706d721cda4541d3b43f2ca00
 #    advertise-client-urls: http://$public_ipv4:2379
 #    initial-advertise-peer-urls: http://$private_ipv4:2380
 #    listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
 #    listen-peer-urls: http://$private_ipv4:2380,http://$private_ipv4:7001
+#    discovery: https://discovery.etcd.io/6a2dbca25a60194c43a990ff4d92eba8
 #  fleet:
 #    public-ip: "$public_ipv4"
 #  flannel:
-#    enterface: "$public_ipv4"
+#    interface: "$public_ipv4"
+
+  units:
+  - name: static.network
+    content: |
+      [Match]
+      Name=enp0s3
+      [Network]
+      Address=192.168.56.116/24
+      Gateway=192.168.56.111
+      DNS=8.8.8.8
+
+#  - name: etcd2.service
+#    command: start
+
+#  - name: fleet.service
+#    command: start
+
+#  - name: flanneld.service
+#    drop-ins:
+#    - name: 50-network-config.conf
+#      content: |
+#        [Service]
+#        ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{ "Network": "10.1.0.0/16" }'
+#    command: start
 
 users:
   - name: admin
