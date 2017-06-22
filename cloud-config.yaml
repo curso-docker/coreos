@@ -19,21 +19,25 @@ coreos:
 #    - name: fleet.service
 #      command: start
 
-#    - name: flanneld.service
-#      drop-ins:  
-#        - name: 50-network-config.conf
-#          content: |
-#            [Service]
-#            ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{ "Network": "10.1.0.0/16" }'
-#          command: start
+#  - name: flanneld.service
+#    dropins:
+#      - name: 50-network-config.conf
+#        contents: |
+#          [Service]
+#          ExecStartPre=/usr/bin/etcdctl set /coreos.com/network/config '{ "Network": "10.1.0.0/16" }'
+#    command: start
 
 #  etcd2:
-#    name: "node01"
-#    discovery: https://discovery.etcd.io/f8e05dc90b0d3206ff559d3cc85b9667
-#    advertise-client-urls: http://192.168.56.116:2379,http://192.168.56.116:4001
-#    initial-advertise-peer-urls: http://192.168.56.116:2380
+#    discovery: https://discovery.etcd.io/17752b3706d721cda4541d3b43f2ca00
+#    advertise-client-urls: http://$public_ipv4:2379
+#    initial-advertise-peer-urls: http://$private_ipv4:2380
 #    listen-client-urls: http://0.0.0.0:2379,http://0.0.0.0:4001
-#    listen-peer-urls: http://192.168.56.116:2380
+#    listen-peer-urls: http://$private_ipv4:2380,http://$private_ipv4:7001
+#    discovery: https://discovery.etcd.io/3073b8787885637e7d49d0ab4bbc2d7b
+#  fleet:
+#    public-ip: "$public_ipv4"
+#  flannel:
+#    enterface: "$public_ipv4"
 
 users:
   - name: admin
