@@ -1,14 +1,14 @@
 [Unit]
 Description=WordPress
-After=mysql.service
 
 [Service]
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill wordpress%i
-ExecStartPre=-/usr/bin/docker rm wordpress%i
+ExecStartPre=-/usr/bin/docker rm -f wordpress%i
 ExecStartPre=/usr/bin/docker pull wordpress
-ExecStart=/usr/bin/docker run --name wordpress%i --link mysql -p 8080:80 -e WORDPRESS_DB_PASSWORD=4linux -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=wordpress wordpress
+ExecStart=/usr/bin/docker run --name wordpress%i --link mysql%i:mysql -p 8080:80 -e WORDPRESS_DB_PASSWORD=4linux -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_USER=wordpress wordpress
 ExecStop=/usr/bin/docker stop wordpress%i
+Restart=always
 
 [X-Fleet]
-X-ConditionMachineOf=mysql.service
+MachineOf=mysql@%i.service
