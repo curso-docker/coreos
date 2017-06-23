@@ -7,8 +7,8 @@ After=docker.service
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill mysql%i
 ExecStartPre=-/usr/bin/docker rm  mysql%i
-ExecStartPre=/usr/bin/docker pull mysql:5.7
-ExecStart=/usr/bin/docker run --name mysql%i -e MYSQL_ROOT_PASSWORD="4linux" -e MYSQL_DATABASE="wordpress" -e MYSQL_USER="wordpress" -e MYSQL_PASSWORD="4linux" mysql:5.7
+ExecStartPre=/usr/bin/docker pull mysql
+ExecStart=/usr/bin/docker run --name mysql%i -e MYSQL_ROOT_PASSWORD="4linux" -e MYSQL_DATABASE="wordpress" -e MYSQL_USER="wordpress" -e MYSQL_PASSWORD="4linux" mysql
 ExecStop=/usr/bin/docker stop mysql%i
 Restart=always
 
